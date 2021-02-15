@@ -12,10 +12,33 @@ public class HelloProcessing2 extends PApplet
 		// is called
 		size(500, 500);
 	}
-
+	
 	
 	public void setup() {
+		//Background
+		background(255,0,0);
+
+		//colorMode(HSB);
 		
+		//Circle
+		noStroke();
+		fill(255, 255, 0);
+		circle((float)width/2, (float)height/2 + (float)height/5, 300);
+
+		//Triangle
+		fill(24,255,255);
+		noStroke();
+		triangle(50, 450, (float)width/2, (float)height/4, 450, 450);
+
+		//Eclipse
+		fill(GRAY);
+		noStroke();
+		ellipse((float)width/2, 300, 204, 80);
+
+		//Circle Eye
+		fill(239);
+		noStroke();
+		circle((float)width/2, 300, 75);
 	}
 
 	// These are fields in the class now and can be used in 
@@ -27,14 +50,15 @@ public class HelloProcessing2 extends PApplet
 	boolean b;
 	
 	public void draw()
-	{	// Takes 1 or 3 parameters. 1 is greyscale, 3 is RGB
-		background(0);         
+	{	
+		// Takes 1 or 3 parameters. 1 is greyscale, 3 is RGB
+		//background(0);         
 
 		// Turns off drawing around shapes
-		noStroke();
+		//noStroke();
 
 		// Sets the fill color
-		fill(0, 0, 255); 
+		//fill(0, 0, 255); 
 
 		// width, height mouseX and mouseY are variables defined
 		// in the PApplet superclass. 
@@ -42,34 +66,34 @@ public class HelloProcessing2 extends PApplet
 		// mouseX and mouseY give the current X and Y
 		// coordinates of the mouse
 		// Draw an ellipse. cx, cy, w and h		
-		ellipse(x, height / 2, mouseX, mouseY);
+		//ellipse(x, height / 2, mouseX, mouseY);
 
-		fill(255, 0, 0);
+		//fill(255, 0, 0);
 
 		// Draws a rect ltx (top left X), tly (top left Y), w and h 
-		rect(200, 90, 50, 90);
+		//rect(200, 90, 50, 90);
 
-		stroke(0, 255, 255);
+		//stroke(0, 255, 255);
 
 		// Changes the thickness of lines
-		strokeWeight(1);
+		//strokeWeight(1);
 
 		// Draws a line x1, y1, x2, y2
-		line (200, 300, 100, 50);
+		//line (200, 300, 100, 50);
 
-		noStroke();
-		fill(0, 255, 0);
+		//noStroke();
+		//fill(0, 255, 0);
 		// Draws a triangle. 3 vertices 
-		triangle(300, 300, 350, 400, 250, 450);
+		//triangle(300, 300, 350, 400, 250, 450);
 
-		stroke(255);
+		//stroke(255);
 		// Draws a single point
-		point(400, 50);
+		//point(400, 50);
 
 		// Changes the thickness of lines
-		strokeWeight(3);
+		//strokeWeight(3);
 
-		line(20, 400, 200, 410);
+		//line(20, 400, 200, 410);
 
 	}
 }
