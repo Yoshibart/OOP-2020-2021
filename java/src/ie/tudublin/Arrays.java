@@ -143,7 +143,7 @@ public class Arrays extends PApplet{
                 
                 for(int i = 0; i < rainfall.length; i++){
                     
-                    float x = map(rainfall[i], 0, sum, 0, TWO_PI);git 
+                    float x = map(rainfall[i], 0, sum, 0, TWO_PI);
                     // textAlign(CENTER);
                     float c = map(i, 0, rainfall.length, 0, 360);
                     float thetaNext = thetaPrev + x;
