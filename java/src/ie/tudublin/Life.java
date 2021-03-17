@@ -163,5 +163,11 @@ public class Life extends PApplet{
             setCell(board, i, size / 2, true);
         }
     }
+
+    public void mouseDragged(){
+        int row = (int) map(mouseY, 0, height, 0, size);
+        int col = (int) map(mouseX, 0, width, 0, size);
+        setCell(board, row, col, true);
+    }
     
 }
