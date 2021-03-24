@@ -26,6 +26,7 @@ public class Player {
         yasc.translate(x, y);
         yasc.rotate(rotation);
         // Write this!!
+        
         yasc.line(- halfW, halfW, 0, - halfW);
         yasc.line(0, - halfW, halfW, halfW);
         yasc.line(halfW, halfW, 0, 0);
