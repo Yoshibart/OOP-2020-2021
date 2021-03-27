@@ -7,130 +7,108 @@ import processing.data.Table;
 import processing.data.TableRow;
 
 public class StarMap extends PApplet {
-
     ArrayList<Star> stars = new ArrayList<Star>();
-
+    float border;
     int startStar = -1;
     int endStar = -1;
 
-
-    
-    void drawGrid()
-    {
-        float border = 0.1f * width;
-        textAlign(CENTER, CENTER);
-        //float drawable = width - (border * 2.0f);
-        // /float gap = drawable / 10.0f;
-        for(int i = -5 ; i <=5 ; i ++)
-        {
-            float x = map(i, -5, 5, border, width - border);
-            float y = map(i, -5, 5, border, height - border);
-            //float x = border + ((i + 5) * gap);
-            //float y = border + ((i + 5) * gap);
-            stroke(0, 0, 255);
-            line(x, border,x, height - border);
-            line(border, y, width - border, y);
-            fill(255);
-            text(i, x, border / 2);
-            text(i, border / 2, y);
+    public void drawgrid(){
+        background(0);
+        for(int i = -5; i <= 5; i++){
+            float X = map(i, -5, 5, border, width - border);
+            stroke(240, 100, 100);
+            line(X, border, X, height - border);
+            line(border, X, height - border, X);
+            fill(360);
+            text(i, X, border / 2);
+            text(i, border / 2, X);
         }
     }
 
-    void printStars()
-    {
-        for(Star s: stars)
-        {
-            println(s);
+    public void drawStars(){
+        for(Star star : stars){
+            star.render(this);
         }
     }
 
-    void loadStars()
-    {
+    public void loadStars(){
         Table table = loadTable("HabHYG15ly.csv", "header");
-        for(TableRow row:table.rows())
-        {
-            Star s = new Star(row);
-            stars.add(s);
+        for(TableRow row : table.rows()){
+            Star star = new Star(row);
+            stars.add(star);
         }
     }
 
-    public void settings() {
-        size(800, 800);
+    public void setup(){
+        colorMode(HSB, 360, 100, 100);
+        border = width * 0.1f;
+        loadStars();
+        drawgrid();
+        drawStars();
+        
     }
 
-    float border;
-
-    public void mouseClicked()
-    {
-        
-        for(int i = 0 ; i < stars.size() ; i ++)
-        {
+    public void mouseClicked(){
+        for(int i = 0; i < stars.size(); i++){
             Star s = stars.get(i);
             float x = map(s.getxG(), -5, 5, border, width - border);
             float y = map(s.getyG(), -5, 5, border, height - border);
-            if (dist(mouseX, mouseY, x, y ) < s.getAbsMag() / 2)
-            {
-                if (startStar == -1)
-                {
+            if(dist(mouseX, mouseY, x, y) < s.getAbsMag() / 2){
+                if(startStar == -1){
                     startStar = i;
                     break;
                 }
-                else if (endStar == -1)
-                {
+                else if(endStar == -1){
                     endStar = i;
                     break;
                 }
-                else 
-                {
+                else{
                     startStar = i;
                     endStar = -1;
-                }                
+                }
             }
         }
     }
 
-    public void setup() {
-        colorMode(RGB);
-        loadStars();
-        printStars();
-        border = width * 0.1f;
+    public void settings(){
+        size(800, 800);
     }
 
-    public void drawStars()
-    {
-        for(Star s: stars)
-        {
-            s.render(this);
-        }
-    }
-
-    public void draw() {
+    public void draw(){
+        colorMode(HSB, 360, 100, 100);
         background(0);
-        drawGrid();
+        drawgrid();
         drawStars();
-        if (startStar != -1 && endStar == -1)
-        {
-            Star s = stars.get(startStar);
-            stroke(255, 255, 0);
-            float x = map(s.getxG(), -5, 5, border, width - border);
-            float y = map(s.getyG(), -5, 5, border, height - border);
+        
+        if(startStar != -1 && endStar == -1){
+            fill(360, 100, 100);
+            float x = map(stars.get(startStar).getxG(), -5, 5, border, width - border);
+            float y = map(stars.get(startStar).getyG(), -5, 5, border, width - border);
             line(x, y, mouseX, mouseY);
-        }
-        else if (startStar != -1 && endStar != -1)
-        {
-            Star s = stars.get(startStar);
-            stroke(255, 255, 0);
-            float x1 = map(s.getxG(), -5, 5, border, width - border);
-            float y1 = map(s.getyG(), -5, 5, border, height - border);
+        }else if(startStar != -1 && endStar != -1){
 
-            Star s1 = stars.get(endStar);            
-            float x2 = map(s1.getxG(), -5, 5, border, width - border);
-            float y2 = map(s1.getyG(), -5, 5, border, height - border);
+            float x1 = map(stars.get(startStar).getxG(), -5, 5, border, width - border);
+            float y1 = map(stars.get(startStar).getyG(), -5, 5, border, width - border);
+            
+            float x2 = map(stars.get(endStar).getxG(), -5, 5, border, width - border);
+            float y2 = map(stars.get(endStar).getyG(), -5, 5, border, width - border);
+            fill(360, 100, 100);
             line(x1, y1, x2, y2);
-            float dist = dist(s.getxG(), s.getyG(), s.getzG(), s1.getxG(), s1.getyG(), s1.getzG());
-            stroke(255);
+
+            float distance = dist(
+                                stars.get(startStar).getxG(),
+                                stars.get(startStar).getyG(),
+                                stars.get(startStar).getzG(),
+                                stars.get(endStar).getxG(),
+                                stars.get(endStar).getyG(),
+                                stars.get(endStar).getzG()
+            );
+            fill(360);
             textAlign(CENTER, CENTER);
-            text("Distance between " + s.getDisplayName() + " and " + s1.getDisplayName() + " is " + dist + " parsecs", width /2 , height - (border / 2));
+            text("Distance between " + stars.get(startStar).getDisplayName() + " and " + stars.get(endStar).getDisplayName() + " is " + distance + " parsecs",
+                width / 2,
+                height - (border / 2)
+            );
         }
     }
 }
