@@ -55,7 +55,7 @@ public class StarMap extends PApplet {
     }
 
     public void settings() {
-        size(800, 800);
+        size(500, 500);
     }
 
     float border;
@@ -92,7 +92,7 @@ public class StarMap extends PApplet {
     public void setup() {
         colorMode(RGB);
         loadStars();
-        printStars();
+        //printStars();
         border = width * 0.1f;
     }
 
