@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Ammo extends GameObject{
+public class Ammo extends GameObject implements PowerUp{
 
     public Ammo(YASC yasc)
     {
@@ -107,4 +107,11 @@ public class Ammo extends GameObject{
     public void setW(float w) {
         this.w = w;
     }
+
+    public void applyTo(Player s) {
+        s.ammo += 10;
+    }
+
+
+
 }

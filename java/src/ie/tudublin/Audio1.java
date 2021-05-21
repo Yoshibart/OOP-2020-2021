@@ -16,8 +16,8 @@ public class Audio1 extends PApplet {
     float[] lerpedBuffer;
 
     public void settings() {
-        //size(1000, 1000, P3D);
-        fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
+        size(1000, 1000, P3D);
+        // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
     float y = 200;
@@ -26,12 +26,13 @@ public class Audio1 extends PApplet {
     int which = 0;
 
     public void setup() {
+        surface.setResizable(true);
         minim = new Minim(this);
-        //ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
+        // ai = minim.getLineIn(Minim.STEREO, width, 44100, 16);
         ap = minim.loadFile("heroplanet.mp3", width);
         ap.play();
         ab = ap.mix; // Connect the buffer to the mp3 file
-        //ab = ai.mix; 
+        // ab = ai.mix; 
         colorMode(HSB);
         lerpedBuffer = new float[width];
 
@@ -70,6 +71,7 @@ public class Audio1 extends PApplet {
         // Calculate the average of the buffer
         for (int i = 0; i < ab.size(); i ++)
         {
+            // System.out.println(ab.get(i));
             sum += abs(ab.get(i));
         }
         average = sum / ab.size();

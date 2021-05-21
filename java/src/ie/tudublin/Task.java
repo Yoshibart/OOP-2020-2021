@@ -13,7 +13,7 @@ public class Task {
 
     public void setTask(String task) {
         this.task = task;
-    }
+    } 
 
     public int getStart() {
         return start;
